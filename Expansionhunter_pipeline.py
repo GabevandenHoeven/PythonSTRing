@@ -46,7 +46,7 @@ def analysis_pipeline(d):
                 sex = "male"
             else:
                 sex = "female"
-            subprocess.call(["expansionhunter_script.sh", filename, prefix, sex])
+            subprocess.call(["sbatch expansionhunter_script.sh", filename, prefix, sex])
 
 
 if __name__ == "__main__":
