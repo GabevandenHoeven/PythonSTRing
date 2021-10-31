@@ -18,5 +18,5 @@
 --reads $1 \
 --reference /hpc/diaggen/data/databases/ref_genomes/Homo_sapiens.GRCh37.GATK.illumina/Homo_sapiens.GRCh37.GATK.illumina.fasta \
 --variant_catalog /hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/variant_catalog/hg19/variant_catalog.json \
---output-prefix /hpc/diaggen/users/Gabe/analysis/output_exhunt/$2 \
+--output-prefix $2 \
 --sex $3
