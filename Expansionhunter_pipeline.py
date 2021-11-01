@@ -3,17 +3,23 @@ import subprocess
 
 
 def processing_pipeline(d):
-    """Processing results of vcf files while looping over a directory.
+    """Calls process_file() to process vcf files in a given directory.
+
+    :param d: str - path to the directory with the vcf files that need to be processed.
+    :return new_file: str - path to the new file containing the simplified output.
     """
     new_file = ""
     for filename in os.listdir(d):
         if filename.endswith(".vcf"):
-            new_file = read_file(filename)
+            new_file = process_file(filename)
     return new_file
 
 
-def read_file(filename):
-    """Reads a file
+def process_file(filename):
+    """Processes a vcf file by ExpansionHunter and writes output to a tsv file.
+
+    :param filename: str - path to the file that is being processed.
+    :return new_filename: str - path to the new file containing the simplified output.
     """
     lines = ["repeat_ID\treference\trepeats_length\tgenotype\n"]
     with open(filename) as file:
@@ -41,6 +47,8 @@ def read_file(filename):
 
 def analysis_pipeline(d):
     """Calls a shell script while looping over a directory.
+
+    :param d: str - - path to the directory with the BAM files that need to be analysed.
     """
     for filename in os.listdir(d):
         if filename.endswith(".bam"):
