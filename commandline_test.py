@@ -6,4 +6,4 @@ if __name__ == "__main__":
     """
     s1 = "Hallo dit is een test"
     s2 = "Dit is een tweede string om te kijken hoe het gaat met meerdere parameters"
-    subprocess.run(["commandline_test.sh", s1, s2])
+    subprocess.run(["/home/cog/gvandenhoeven/repos/PythonSTRing/commandline_test.sh", s1, s2])
