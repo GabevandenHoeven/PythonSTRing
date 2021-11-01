@@ -48,7 +48,7 @@ def process_file(filename):
 def analysis_pipeline(d):
     """Calls a shell script while looping over a directory.
 
-    :param d: str - - path to the directory with the BAM files that need to be analysed.
+    :param d: str - path to the directory with the BAM files that need to be analysed.
     """
     for filename in os.listdir(d):
         if filename.endswith(".bam"):
