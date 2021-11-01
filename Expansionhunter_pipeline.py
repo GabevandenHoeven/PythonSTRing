@@ -11,7 +11,8 @@ def analysis_pipeline(in_d, out_d):
     """
     for filename in os.listdir(in_d):
         if filename.endswith(".bam"):
-            prefix = out_d + filename.split("/")[-1].removesuffix(".bam")
+            # prefix = out_d + filename.split("/")[-1].removesuffix(".bam")
+            prefix = out_d + filename.split("/")[-1].replace(".bam", "")
             if "CM" in prefix:
                 sex = "male"
             else:

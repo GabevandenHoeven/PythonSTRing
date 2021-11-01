@@ -11,7 +11,8 @@ def analysis_pipeline(in_d, out_d):
     """
     for filename in os.listdir(in_d):
         if filename.endswith(".bam"):
-            prefix = out_d + filename.split("/")[-1].removesuffix(".bam")
+            # prefix = out_d + filename.split("/")[-1].removesuffix(".bam")
+            prefix = out_d + filename.split("/")[-1].replace(".bam", "")
             subprocess.run(f"singularity shell -B /hpc/diaggen:/hpc/diaggen "
                            f"/hpc/diaggen/software/singularity_cache/lobster_v4.0.0.img")
             subprocess.run(f"allelotype --command classify --bam {filename} "
