@@ -6,4 +6,4 @@
 #SBATCH --mail-type ALL
 
 module load python/3.6.1
-python /home/cog/gvandenhoeven/repos/PythonSTRing/$1
+python /home/cog/gvandenhoeven/repos/PythonSTRing/$1 $2 $3

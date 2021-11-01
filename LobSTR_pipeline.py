@@ -1,6 +1,6 @@
 import os
 import subprocess
-from Expansionhunter_pipeline import processing_pipeline
+import sys
 
 
 def analysis_pipeline(d):
@@ -13,40 +13,23 @@ def analysis_pipeline(d):
             prefix = "/hpc/diaggen/users/Gabe/analysis/output_lobstr/allelotype/" + \
                      filename.split("/")[-1].removesuffix(".bam")
             subprocess.call(["/home/cog/gvandenhoeven/repos/PythonSTRing/lobSTR_script.sh", filename, prefix])
-
-
-def process_file(filename):
-    """Processes a vcf file by lobSTR and writes output to a tsv file.
-
-    :param filename: str - path to the file that is being processed.
-    :return new_filename: str - path to the new file containing the simplified output.
-    """
-    lines = ["repeat_ID\treference\trepeats_length\tgenotype\n"]
-    with open(filename) as file:
-        for line in file:
-            print("")
-
-    new_filename = "/hpc/diaggen/users/Gabe/analysis/output_lobstr/allelotype/" + \
-                   filename.split("/")[-1].removesuffix(".vcf") + "output.tsv"
-    with open(new_filename, "w") as file:
-        for line in lines:
-            file.write(line)
-    return new_filename
+            subprocess.run(f"singularity shell -B /hpc/diaggen:/hpc/diaggen "
+                           f"/hpc/diaggen/software/singularity_cache/lobster_v4.0.0.img")
+            subprocess.run(f"allelotype --command classify --bam {filename} "
+                           f"--noise_model /hpc/diaggen/users/Gabe/tools/lobSTR/models/illumina_v3.pcrfree "
+                           f"--strinfo /hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_v3.0.2_hg19_strinfo.tab "
+                           f"--index-prefix /hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_hg19_ref/lobSTR_ "
+                           f"--out {prefix}")
 
 
 if __name__ == "__main_":
-    print("Starting pipeline...")
-    print("Staring analysis...")
-    pc_dir = "/hpc/diaggen/users/Gabe/data/wes/Positive_controls/"
-    giab_dir = "/hpc/diaggen/users/Gabe/data/wes/GIAB/"
+    print("Staring analysis pipeline...")
+    pc_dir, giab_dir = sys.argv[1], sys.argv[2]
+    # pc_dir = "/hpc/diaggen/users/Gabe/data/wes/Positive_controls/"
+    # giab_dir = "/hpc/diaggen/users/Gabe/data/wes/GIAB/"
     analysis_pipeline(pc_dir)
     analysis_pipeline(giab_dir)
     print("Analysis complete.")
-
-    print("Starting processing output...")
-    res_dir = "/hpc/diaggen/users/Gabe/analysis/output_lobstr/allelotype/"
-    output = processing_pipeline(res_dir)
-    print("Processing complete.\nNew file in " + output)
 
 
 
