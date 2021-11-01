@@ -17,17 +17,16 @@ def analysis_pipeline(in_d, out_d):
                 sex = "male"
             else:
                 sex = "female"
-            subprocess.run(f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/bin/ExpansionHunter "
-                           f"--reads {filename} "
-                           f"--reference /hpc/diaggen/data/databases/ref_genomes/"
-                           f"Homo_sapiens.GRCh37.GATK.illumina/Homo_sapiens.GRCh37.GATK.illumina.fasta "
-                           f"--variant_catalog /hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/"
-                           f"variant_catalog/hg19/variant_catalog.json --output-prefix {prefix} --sex {sex}")
+            subprocess.run([f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/bin/ExpansionHunter",
+                            f"--reads", f"{filename}",
+                            f"--reference", f"/hpc/diaggen/data/databases/ref_genomes/"
+                            f"Homo_sapiens.GRCh37.GATK.illumina/Homo_sapiens.GRCh37.GATK.illumina.fasta",
+                            f"--variant_catalog", f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/"
+                            f"variant_catalog/hg19/variant_catalog.json",
+                            f"--output-prefix", f"{prefix}", f"--sex", f"{sex}"])
 
 
 if __name__ == "__main__":
     print("Starting analysis pipeline...")
     analysis_pipeline(sys.argv[1], sys.argv[2])
     print("Analysis complete.")
-
-
