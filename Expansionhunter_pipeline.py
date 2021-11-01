@@ -74,4 +74,4 @@ if __name__ == "__main__":
     print("Starting processing pipeline...")
     res_dir = "/hpc/diaggen/users/Gabe/analysis/output_exhunt/"
     output = processing_pipeline(res_dir)
-    print("processing complete.\nNew output in " + output)
+    print("Processing complete.\nNew output in " + output)
