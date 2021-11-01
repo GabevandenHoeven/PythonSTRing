@@ -5,9 +5,11 @@ import subprocess
 def processing_pipeline(d):
     """Processing results of vcf files while looping over a directory.
     """
+    new_file = ""
     for filename in os.listdir(d):
         if filename.endswith(".vcf"):
-            read_file(filename)
+            new_file = read_file(filename)
+    return new_file
 
 
 def read_file(filename):
@@ -34,6 +36,7 @@ def read_file(filename):
     with open(new_filename, "w") as file:
         for line in lines:
             file.write(line)
+    return new_filename
 
 
 def analysis_pipeline(d):
@@ -51,22 +54,16 @@ def analysis_pipeline(d):
 
 
 if __name__ == "__main__":
+    # Analysis pipeline
+    print("Starting analysis pipeline...")
+    pc_dir = "/hpc/diaggen/users/Gabe/data/wes/Positive_controls/"
+    giab_dir = "/hpc/diaggen/users/Gabe/data/wes/GIAB/"
+    analysis_pipeline(pc_dir)
+    analysis_pipeline(giab_dir)
+    print("Analysis complete.")
 
-    pipe = input()
-
-    if pipe.upper() == "ANALYSE":
-        # Analysis pipeline
-        print("Starting analysis pipeline...")
-        pc_dir = "/hpc/diaggen/users/Gabe/data/wes/Positive_controls/"
-        giab_dir = "/hpc/diaggen/users/Gabe/data/wes/GIAB/"
-        analysis_pipeline(pc_dir)
-        analysis_pipeline(giab_dir)
-    elif pipe.upper() == "PROCESS":
-        # Processing pipeline
-        print("Starting processing pipeline...")
-        res_dir = "/hpc/diaggen/users/Gabe/analysis/output_exhunt/"
-        processing_pipeline(res_dir)
-    else:
-        print("Error. Pipeline command not recognised.")
-        print("Use \"ANALYSE\" to activate the analysis pipeline and process bam files using ExpansionHunter, "
-              "or use \"PROCESS\" to activate the processing pipeline to process ExpansionHunter output vcf files.")
+    # Processing pipeline
+    print("Starting processing pipeline...")
+    res_dir = "/hpc/diaggen/users/Gabe/analysis/output_exhunt/"
+    output = processing_pipeline(res_dir)
+    print("processing complete.\nNew output in " + output)
