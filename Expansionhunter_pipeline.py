@@ -18,7 +18,7 @@ def analysis_pipeline(in_d, out_d):
             else:
                 sex = "female"
             subprocess.run([f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/bin/ExpansionHunter",
-                            f"--reads", f"{filename}",
+                            f"--reads", f"{in_d}{filename}",
                             f"--reference", f"/hpc/diaggen/data/databases/ref_genomes/"
                             f"Homo_sapiens.GRCh37.GATK.illumina/Homo_sapiens.GRCh37.GATK.illumina.fasta",
                             f"--variant-catalog", f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/"
