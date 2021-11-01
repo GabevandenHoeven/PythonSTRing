@@ -9,7 +9,7 @@ def analysis_pipeline(d):
         if filename.endswith(".bam"):
             prefix = "/hpc/diaggen/users/Gabe/analysis/output_lobstr/allelotype/" + \
                      filename.split("/")[-1].removesuffix(".bam")
-            subprocess.call(["sbatch lobSTR_script.sh", filename, prefix])
+            subprocess.call(["/home/cog/gvandenhoeven/repos/PythonSTRing/lobSTR_script.sh", filename, prefix])
 
 
 def processing_pipeline(d):

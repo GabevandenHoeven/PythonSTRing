@@ -1,10 +1,5 @@
 #!/bin/bash
-#SBATCH --time=1:00:00
-#SBATCH --c=2
-#SBATCH --mem 5G
-#SBATCH --mail-user g.c.w.vandenhoeven-2@umcutrecht.nl
-#SBATCH --mail-type ALL
-#
+
 # This is a script that will call ExpansionHunter to perform an analysis using variable input
 #
 # "reads" need to be in a BAM file

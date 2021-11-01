@@ -1,9 +1,4 @@
 #!/bin/bash
-#SBATCH --time=1:00:00
-#SBATCH --c=2
-#SBATCH --mem 5G
-#SBATCH --mail-user g.c.w.vandenhoeven-2@umcutrecht.nl
-#SBATCH --mail-type ALL
 
 # Dit is een script wat met twee input velden een lobSTR analyse draait voor een bam file.
 # parameters zijn:

@@ -28,7 +28,7 @@ def read_file(filename):
                 if len(alt) == 1:
                     lines.append(rep_id+"\t"+ref+"\t"+str(alt[0])+"\t"+genotype+"\n")
                 else:
-                    lines.append(rep_id+"\t"+ref+"\t"+alt[0]+","+alt[1]+"\t"+genotype+"\n")
+                    lines.append(rep_id+"\t"+ref+"\t"+alt[0]+", "+alt[1]+"\t"+genotype+"\n")
     new_filename = "/hpc/diaggen/users/Gabe/analysis/output_exhunt/" + filename.split("/")[-1].removesuffix(".vcf") \
                    + "output.tsv"
     with open(new_filename, "w") as file:
@@ -46,7 +46,8 @@ def analysis_pipeline(d):
                 sex = "male"
             else:
                 sex = "female"
-            subprocess.call(["sbatch expansionhunter_script.sh", filename, prefix, sex])
+            subprocess.call(["/home/cog/gvandenhoeven/repos/PythonSTRing/expansionhunter_script.sh",
+                             filename, prefix, sex])
 
 
 if __name__ == "__main__":
