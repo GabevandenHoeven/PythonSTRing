@@ -22,7 +22,7 @@ def analysis_pipeline(in_d, out_d):
                             f"--out", f"{prefix}"])
 
 
-if __name__ == "__main_":
+if __name__ == "__main__":
     print("Staring analysis pipeline...")
     print("arg1: " + sys.argv[1])
     print("arg2: " + sys.argv[2])
