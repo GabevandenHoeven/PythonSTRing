@@ -28,7 +28,7 @@ def analysis_pipeline(in_d, out_d):
                              f"--index-prefix " \
                              f"/hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_hg19_ref/lobSTR_ " \
                              f"--out {prefix}"
-            action = f"singularity exec -B {singularity_mount_path} {singularity_img} && {lobstr_command}"
+            action = f"singularity exec -B {singularity_mount_path} {singularity_img} {lobstr_command}"
             #print(action)
             os.system(action)
 
