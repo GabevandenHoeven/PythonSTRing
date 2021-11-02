@@ -24,7 +24,7 @@ def analysis_pipeline(in_d, out_d):
 
 if __name__ == "__main_":
     print("Staring analysis pipeline...")
-    # pc_dir = "/hpc/diaggen/users/Gabe/data/wes/Positive_controls/"
-    # giab_dir = "/hpc/diaggen/users/Gabe/data/wes/GIAB/"
+    print("arg1: " + sys.argv[1])
+    print("arg2: " + sys.argv[2])
     analysis_pipeline(sys.argv[1], sys.argv[2])
     print("Analysis complete.")
