@@ -27,7 +27,7 @@ def analysis_pipeline(in_d, out_d):
                              f"--index-prefix " \
                              f"/hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_hg19_ref/lobSTR_ " \
                              f"--out {prefix}"
-            subprocess.run(f"singularity exec -B {singularity_img} {lobstr_command}")
+            subprocess.run(["singularity", "exec", "-B", singularity_img, lobstr_command])
 
 
 if __name__ == "__main__":
