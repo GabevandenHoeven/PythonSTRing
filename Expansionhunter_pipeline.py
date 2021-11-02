@@ -11,8 +11,7 @@ def analysis_pipeline(in_d, out_d):
     """
     for filename in os.listdir(in_d):
         if filename.endswith(".bam"):
-            print(filename)
-            prefix = out_d + filename.split("/")[-1].replace(".bam", "")
+            prefix = out_d + filename.replace(".bam", "")
             sb = False
             sex = ""
             if "CM" or "PM" in filename:
@@ -22,15 +21,14 @@ def analysis_pipeline(in_d, out_d):
                 sex = "female"
                 sb = True
             if sb:
-                print("werkt")
-                # subprocess.run(
-                #     [f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/bin/ExpansionHunter",
-                #      f"--reads", f"{in_d}{filename}",
-                #      f"--reference", f"/hpc/diaggen/data/databases/ref_genomes/"
-                #                      f"Homo_sapiens.GRCh37.GATK.illumina/Homo_sapiens.GRCh37.GATK.illumina.fasta",
-                #      f"--variant-catalog", f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/"
-                #                            f"variant_catalog/hg19/variant_catalog.json",
-                #      f"--output-prefix", f"{prefix}", f"--sex", f"{sex}"])
+                subprocess.run(
+                    [f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/bin/ExpansionHunter",
+                     f"--reads", f"{in_d}{filename}",
+                     f"--reference", f"/hpc/diaggen/data/databases/ref_genomes/"
+                                     f"Homo_sapiens.GRCh37.GATK.illumina/Homo_sapiens.GRCh37.GATK.illumina.fasta",
+                     f"--variant-catalog", f"/hpc/diaggen/users/Gabe/tools/ExpansionHunter-v5.0.0-linux_x86_64/"
+                                           f"variant_catalog/hg19/variant_catalog.json",
+                     f"--output-prefix", f"{prefix}", f"--sex", f"{sex}"])
             else:
                 print("Error.\nCould not determine gender")
 
