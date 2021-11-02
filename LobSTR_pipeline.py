@@ -20,14 +20,16 @@ def analysis_pipeline(in_d, out_d):
             #                               f"lobstr_v3.0.2_hg19_strinfo.tab", f"--index-prefix",
             #                 f"/hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_hg19_ref/lobSTR_",
             #                 f"--out", f"{prefix}"])
-            singularity_img = "/hpc/diaggen:/hpc/diaggen /hpc/diaggen/software/singularity_cache/lobster_v4.0.0.img"
+            singularity_img = "singularity shell -B " \
+                              "/hpc/diaggen:/hpc/diaggen /hpc/diaggen/software/singularity_cache/lobster_v4.0.0.img"
             lobstr_command = f"allelotype --command classify --bam {in_d}{filename} --noise_model " \
                              f"/hpc/diaggen/users/Gabe/tools/lobSTR/models/illumina_v3.pcrfree --strinfo " \
                              f"/hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_v3.0.2_hg19_strinfo.tab " \
                              f"--index-prefix " \
                              f"/hpc/diaggen/users/Gabe/tools/lobSTR/lobstr_new/lobstr_hg19_ref/lobSTR_ " \
                              f"--out {prefix}"
-            subprocess.run(["singularity", "shell", "-B", singularity_img, lobstr_command])
+            action = singularity_img + " && " + lobstr_command
+            os.system(action)
 
 
 if __name__ == "__main__":
