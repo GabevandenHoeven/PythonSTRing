@@ -40,17 +40,19 @@ def process_files(in_d, new_dir):
                         chro = line.split("\t")
                         b = False
                         # The range is the position in which this STR is located
+                        # The specific position are derived from grep calls into some of the output files
+                        # A source to hg19 positions of genes can be found here:
                         # Source: https://github.com/mcfrith/tandem-genotypes/blob/master/hg19-disease-tr.txt
-                        if chro == "X" and (int(pos) or int(end) in range(66765159, 66765228)):
+                        if chro == "X" and int(pos) == 66765159:
                             rep_id = "AR"
                             b = True
-                        elif chro == "9" and (int(pos) or int(end) in range(27573526, 27573544)):
+                        elif chro == "9" and int(pos) == 27573483:
                             rep_id = "C9ORF72"
                             b = True
-                        elif chro == "14" and (int(pos) or int(end) in range(92537354, 92537384)):
+                        elif chro == "14" and int(pos) == 92537355:
                             rep_id = "SCA3"
                             b = True
-                        elif chro == "19" and (int(pos) or int(end) in range(46273462, 46273522)):
+                        elif chro == "19" and int(pos) == 46273463:
                             rep_id = "DM1"
                             b = True
                         if b:
