@@ -32,7 +32,7 @@ def process_files(in_d, new_dir):
                      "#FORMAT=<ID=SB,Number=1,Type=Float,Description=<Strand bias>\n",
                      "#FORMAT=<ID=STITCH,Number=1,Type=Integer,Description=<Number of stitched reads>\n",
                      "#Chr\tPos\tEnd\tREPID\tRef\tRPA\tRPU\tFMT\t" + filename.replace(".vcf", "") + "\n"]
-            with open(filename) as file:
+            with open(in_d + filename) as file:
                 for line in file:
                     if not line.startswith("#"):
                         pos = line.split("\t")[1]
