@@ -11,8 +11,8 @@ def process_files(in_d, new_dir):
     :param in_d: str - path to the directory with the vcf files that need to be processed.
     :param new_dir: str - path to the output directory.
     """
-    db = pathlib.Path.exists(new_dir)
-    if not db:
+    db = pathlib.Path(new_dir)
+    if not db.exists():
         print("Given output directory does not exist.\nMaking directory now.")
         subprocess.run(["mkdir", new_dir])
     for filename in os.listdir(in_d):
