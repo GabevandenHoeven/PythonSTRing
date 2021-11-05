@@ -3,7 +3,7 @@ import sys
 
 
 def analysis_pipeline(in_d, out_d):
-    """Calls a shell script while looping over a given directory.
+    """Runs an analysis while looping over a given directory.
 
     :param in_d: str - path to the directory with the BAM files that need to be analysed.
     :param out_d: str - path to the output directory.
