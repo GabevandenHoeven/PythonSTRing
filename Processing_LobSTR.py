@@ -73,8 +73,5 @@ def process_files(in_d, new_dir):
 
 if __name__ == "__main__":
     print("Starting processing of output files.")
-    path1 = "/Users/ghoeven2/Documents/"
-    path2 = "/Users/ghoeven2/Documents/"
-    process_files(path1, path2)
-    # process_files(sys.argv[1], sys.argv[2])
+    process_files(sys.argv[1], sys.argv[2])
     print("Processing successful.\nNew files can be found in the new directory.")
