@@ -57,19 +57,24 @@ def process_files(in_d, new_dir):
                             b = True
                         if b:
                             ref = line.split("\t")[7].split(";")[3].replace("REF=", "")
-                            rpa = line.split("\t")[7].split(";")[7].replace("RPA=", "")
                             rpu = line.split("\t")[7].split(";")[5].replace("RU=", "")
+                            if "RPA=" in line.split("\t")[7]:
+                                rpa = line.split("\t")[7].split(";")[7].replace("RPA=", "")
+                            else:
+                                rpa = "."
                             fmt = line.split("\t")[8]
                             info = line.split("\t")[9]
                             new_line = f"{chro}\t{pos}\t{end}\t{rep_id}\t{ref}\t{rpa}\t{rpu}\t{fmt}\t{info}"
                             lines.append(new_line)
             new_filename = new_dir + filename.replace(".vcf", ".tsv")
             with open(new_filename, "w") as file:
-                for line in lines:
-                    file.write(line)
+                file.writelines(lines)
 
 
 if __name__ == "__main__":
     print("Starting processing of output files.")
-    process_files(sys.argv[1], sys.argv[2])
+    path1 = "/Users/ghoeven2/Documents/"
+    path2 = "/Users/ghoeven2/Documents/"
+    process_files(path1, path2)
+    # process_files(sys.argv[1], sys.argv[2])
     print("Processing successful.\nNew files can be found in the new directory.")
