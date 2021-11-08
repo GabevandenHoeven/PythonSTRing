@@ -37,7 +37,7 @@ def process_files(in_d, new_dir):
                     if not line.startswith("#"):
                         pos = line.split("\t")[1]
                         end = line.split("\t")[7].split(";")[0].replace("END=", "")
-                        chro = line.split("\t")
+                        chro = line.split("\t")[0]
                         b = False
                         # The range is the position in which this STR is located
                         # The specific position are derived from grep calls into some of the output files
@@ -61,7 +61,7 @@ def process_files(in_d, new_dir):
                             rpu = line.split("\t")[7].split(";")[5].replace("RU=", "")
                             fmt = line.split("\t")[8]
                             info = line.split("\t")[9]
-                            new_line = f"{chro}\t{pos}\t{end}\t{rep_id}\t{ref}\t{rpa}\t{rpu}\t{fmt}\t{info}\n"
+                            new_line = f"{chro}\t{pos}\t{end}\t{rep_id}\t{ref}\t{rpa}\t{rpu}\t{fmt}\t{info}"
                             lines.append(new_line)
             new_filename = new_dir + filename.replace(".vcf", ".tsv")
             with open(new_filename, "w") as file:
