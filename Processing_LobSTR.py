@@ -65,7 +65,8 @@ def process_files(in_d, new_dir):
                             lines.append(new_line)
             new_filename = new_dir + filename.replace(".vcf", ".tsv")
             with open(new_filename, "w") as file:
-                file.writelines(lines)
+                for line in lines:
+                    file.write(line)
 
 
 if __name__ == "__main__":
