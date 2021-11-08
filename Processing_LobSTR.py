@@ -58,12 +58,16 @@ def process_files(in_d, new_dir):
                         if b:
                             ref = line.split("\t")[7].split(";")[3].replace("REF=", "")
                             rpu = line.split("\t")[7].split(";")[5].replace("RU=", "")
-                            if "RPA=" in line.split("\t")[7]:
-                                rpa = line.split("\t")[7].split(";")[7].replace("RPA=", "")
-                            else:
-                                rpa = "."
                             fmt = line.split("\t")[8]
                             info = line.split("\t")[9]
+                            if info.split(":")[0] == "0/0":
+                                rpa = ref + "," + ref
+                            elif info.split(":")[0] == "0/1" or "1/0":
+                                rpa = ref + "," + line.split("\t")[7].split(";")[7].replace("RPA=", "")
+                            elif info.split(":")[0] == "1/2" or "2/1":
+                                rpa = line.split("\t")[7].split(";")[7].replace("RPA=", "")
+                            else:
+                                rpa = ""
                             new_line = f"{chro}\t{pos}\t{end}\t{rep_id}\t{ref}\t{rpa}\t{rpu}\t{fmt}\t{info}"
                             lines.append(new_line)
             new_filename = new_dir + filename.replace(".vcf", ".tsv")
