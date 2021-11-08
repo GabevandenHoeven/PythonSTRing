@@ -62,9 +62,12 @@ def process_files(in_d, new_dir):
                             info = line.split("\t")[9]
                             if info.split(":")[0] == "0/0":
                                 rpa = ref + "," + ref
-                            elif info.split(":")[0] == "0/1" or "1/0":
+                            elif info.split(":")[0] == "1/1":
+                                rpa = line.split("\t")[7].split(";")[7].replace("RPA=", "")
+                                rpa = rpa + "," + rpa
+                            elif info.split(":")[0] == "0/1" or info.split(":")[0] == "1/0":
                                 rpa = ref + "," + line.split("\t")[7].split(";")[7].replace("RPA=", "")
-                            elif info.split(":")[0] == "1/2" or "2/1":
+                            elif info.split(":")[0] == "1/2" or info.split(":")[0] == "2/1":
                                 rpa = line.split("\t")[7].split(";")[7].replace("RPA=", "")
                             else:
                                 rpa = ""
