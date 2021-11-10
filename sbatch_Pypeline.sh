@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --time=00:15:00
-#SBATCH --cpus-per-task=2
-#SBATCH --mem 5G
+#SBATCH --time=00:30:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem 32G
 #SBATCH --mail-user g.c.w.vandenhoeven-2@umcutrecht.nl
 #SBATCH --mail-type ALL
 
