@@ -39,7 +39,6 @@ def process_files(in_d, new_dir):
                         end = line.split("\t")[7].split(";")[0].replace("END=", "")
                         chro = line.split("\t")[0]
                         b = False
-                        # The range is the position in which this STR is located
                         # The specific position are derived from grep calls into some of the output files
                         # A source to hg19 positions of genes can be found here:
                         # Source: https://github.com/mcfrith/tandem-genotypes/blob/master/hg19-disease-tr.txt
