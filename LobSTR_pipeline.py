@@ -1,6 +1,7 @@
 import os
 import sys
 from LobSTR_to_xl import process_files
+import xlsxwriter
 
 
 def analysis_pipeline(in_d, out_d):
