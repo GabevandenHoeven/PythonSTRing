@@ -1,5 +1,6 @@
 import os
 import sys
+from LobSTR_to_xl import process_files
 
 
 def analysis_pipeline(in_d, out_d):
@@ -28,3 +29,6 @@ if __name__ == "__main__":
     print("Staring analysis pipeline...")
     analysis_pipeline(sys.argv[1], sys.argv[2])
     print("Analysis complete.")
+    print("Processing output now...")
+    process_files(sys.argv[2])
+    print("Processing complete.")
