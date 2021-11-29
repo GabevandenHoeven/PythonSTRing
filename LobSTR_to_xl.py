@@ -1,4 +1,6 @@
 import os
+import sys
+
 import xlsxwriter
 
 
@@ -85,5 +87,6 @@ def process_files(in_d):
 
 
 if __name__ == "__main__":
-    d = "/Users/ghoeven2/Documents/test_vcf/"
-    process_files(d)
+    print("Processing output now...")
+    process_files(sys.argv[1])
+    print("Processing complete.")
