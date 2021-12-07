@@ -1,6 +1,4 @@
 import os
-import sys
-import xlsxwriter
 
 
 def process_files(in_d):
@@ -10,9 +8,7 @@ def process_files(in_d):
 
     """
 
-    lines = [
-        ["Sample", "Gene", "Allele", "Tool", "Normalised"]
-    ]
+    lines = ["Sample,Gene,Allele,Tool,Normalised\n"]
     for filename in os.listdir(in_d):
         if filename.endswith(".vcf"):
             print("Working on file: " + filename)
@@ -41,51 +37,58 @@ def process_files(in_d):
                             if line.split("\t")[9].split(":")[0] == "0/0":
                                 allele = ref
                                 normalised = 0
-                                new_line = [sample, gene, allele, tool, normalised]
+                                new_line = sample + "," + gene + "," + str(allele) + "," + tool + "," \
+                                           + str(normalised) + "\n"
                                 lines.append(new_line)
                                 lines.append(new_line)
                             elif line.split("\t")[9].split(":")[0] == "1/1":
                                 allele = float(line.split("\t")[7].split(";")[7].replace("RPA=", ""))
                                 normalised = allele - ref
-                                new_line = [sample, gene, allele, tool, normalised]
+                                new_line = sample + "," + gene + "," + str(allele) + "," + tool + "," \
+                                           + str(normalised) + "\n"
                                 lines.append(new_line)
                                 lines.append(new_line)
                             elif line.split("\t")[9].split(":")[0] == "0/1" or \
                                     line.split("\t")[9].split(":")[0] == "1/0":
                                 allele = ref
                                 normalised = 0
-                                new_line = [sample, gene, allele, tool, normalised]
+                                new_line = sample + "," + gene + "," + str(allele) + "," + tool + "," \
+                                           + str(normalised) + "\n"
                                 lines.append(new_line)
                                 allele = float(line.split("\t")[7].split(";")[7].replace("RPA=", ""))
                                 normalised = allele - ref
-                                new_line = [sample, gene, allele, tool, normalised]
+                                new_line = sample + "," + gene + "," + str(allele) + "," + tool + "," \
+                                           + str(normalised) + "\n"
                                 lines.append(new_line)
                             elif line.split("\t")[9].split(":")[0] == "1/2" or \
                                     line.split("\t")[9].split(":")[0] == "2/1":
                                 ls = line.split("\t")[7].split(";")[7].replace("RPA=", "").split(",")
                                 for allele in ls:
                                     normalised = float(allele) - ref
-                                    new_line = [sample, gene, float(allele), tool, normalised]
+                                    new_line = sample + "," + gene + "," + str(allele) + "," + tool + "," \
+                                               + str(normalised) + "\n"
                                     lines.append(new_line)
                             else:
                                 print("Error. This file seems to be incompatible with the script.")
+    new_file = check_file("results_lobstr.csv")
+    with open(new_file, "w") as f:
+        f.writelines(lines)
 
-    workbook = xlsxwriter.Workbook("LobSTR_results.xlsx")
-    worksheet = workbook.add_worksheet("Sheet1")
-    row = 0
-    col = 0
-    for sample, gene, allele, tool, normalised in lines:
-        worksheet.write(row, col, sample)
-        worksheet.write(row, col + 1, gene)
-        worksheet.write(row, col + 2, allele)
-        worksheet.write(row, col + 3, tool)
-        worksheet.write(row, col + 4, normalised)
-        row += 1
 
-    workbook.close()
+def check_file(file_path):
+    if os.path.exists(file_path):
+        numb = 1
+        while True:
+            new_path = "{0}_{2}{1}".format(*os.path.splitext(file_path) + (numb,))
+            if os.path.exists(new_path):
+                numb += 1
+            else:
+                return new_path
+    return file_path
 
 
 if __name__ == "__main__":
     print("Processing output now...")
-    process_files(sys.argv[1])
+    d = "/Users/ghoeven2/Documents/test_vcf/"
+    process_files(d)
     print("Processing complete.")
