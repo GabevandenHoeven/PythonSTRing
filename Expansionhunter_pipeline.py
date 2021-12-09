@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+from Expansionhunter_to_csv import process_files
 
 
 def analysis_pipeline(in_d, out_d):
@@ -37,3 +38,6 @@ if __name__ == "__main__":
     print("Starting analysis pipeline...")
     analysis_pipeline(sys.argv[1], sys.argv[2])
     print("Analysis complete.")
+    print("Processing output now...")
+    process_files(sys.argv[2])
+    print("Processing complete.")
