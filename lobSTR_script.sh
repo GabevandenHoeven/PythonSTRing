@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Dit is een script wat met twee input velden een lobSTR analyse draait voor een bam file.
-# parameters zijn:
+# Script to run analysis with LobSTR for a BAM file.
+# Parameters are:
 # $1 : absolute/path/bam_file.bam
 # $2 : absolute/path/output_prefix
 
